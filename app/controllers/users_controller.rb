@@ -1,15 +1,23 @@
 class UsersController < ApplicationController
+    before_action :authorized, only: [:persist]
+    
+    def index
+        users = User.all
+        render json: users
+
+    end
     
     def create
-        user = User.create(new_user_params)
-        if user.valid?
-            render json: user, :except =>  [:password_digest, :created_at, :updated_at]
+        @user = User.create(new_user_params)
+        if @user.valid?
+            # give a token if valid 
+            wristband = encode_token({user_id: @user.id})
+            
+            render json: {user:@user, token:wristband}, :except =>  [:password_digest, :created_at, :updated_at]
         else
             render json: {errors: @user.errors.full_messages}
         end
     end
-
-
 
     private
     def new_user_params
