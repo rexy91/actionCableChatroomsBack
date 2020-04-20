@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     def index
         users = User.all
         render json: users
-
     end
     
     def create
@@ -17,6 +16,11 @@ class UsersController < ApplicationController
         else
             render json: {errors: @user.errors.full_messages}
         end
+    end
+
+    def persist
+        wristband = encode_token({user_id: @user.id})
+        render json: {user: @user , token: wristband}
     end
 
     private
