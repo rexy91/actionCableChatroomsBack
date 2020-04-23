@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     end
 
     def login
-        def login 
+            
             @user= User.find_by(username: params[:username])
             if @user && @user.authenticate(params[:password])
               wristband = encode_token({user_id: @user.id})
@@ -27,7 +27,6 @@ class UsersController < ApplicationController
             else
               render json: {error: "Invalid username or password"}
             end
-        end
     end
 
     def persist
