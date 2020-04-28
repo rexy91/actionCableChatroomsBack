@@ -3,6 +3,8 @@ class RoomsChannel < ApplicationCable::Channel
     # when a user is 'subscribed' it means they have loaded the relevant page and viewing it(the chat room)
 
     def subscribed
+        # byebug will be hit upon RoomWebSocket componentDidMount => this.props.CableApp.cable.subscriptions.create()
+        byebug
         # stream_for takes an object
         # subscriptions are being created on the RoomWebSocket component from the front end 
         @room = Room.find_by(id: params[:room_id])
