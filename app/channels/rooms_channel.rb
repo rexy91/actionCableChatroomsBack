@@ -4,7 +4,7 @@ class RoomsChannel < ApplicationCable::Channel
 
     def subscribed
         # byebug will be hit upon RoomWebSocket componentDidMount => this.props.CableApp.cable.subscriptions.create()
-        byebug
+        # byebug
         # stream_for takes an object
         # subscriptions are being created on the RoomWebSocket component from the front end 
         @room = Room.find_by(id: params[:room_id])
