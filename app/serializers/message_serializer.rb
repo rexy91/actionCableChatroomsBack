@@ -1,3 +1,5 @@
 class MessageSerializer < ActiveModel::Serializer
-  attributes :id
+  # to render the user it belongs to , just add to attribute 
+  attributes :id, :content, :user, :user_id, :room_id
+  # belongs_to :user
 end
